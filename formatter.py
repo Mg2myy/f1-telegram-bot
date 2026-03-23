@@ -143,10 +143,7 @@ def format_pre_race_message(ctx: PreRaceContext, ai_summary: str) -> str:
     race_time = format_time(ctx.session.date_start) if ctx.session.date_start else "待定"
 
     sections = [
-        f"{flag} <b>{_e(gp)}</b>",
-        f"📍 {_e(circuit)} · {_e(country)}",
-        f"🕐 {race_time} 北京时间",
-        "─ ─ ─ ─ ─ ─ ─ ─ ─ ─",
+        f"🏁 <b>{_e(gp)} · 赛前预告</b>\n{flag} {_e(circuit)} · {_e(country)}\n🕐 {race_time} 北京时间",
     ]
 
     if ctx.grid:
@@ -162,7 +159,7 @@ def format_pre_race_message(ctx: PreRaceContext, ai_summary: str) -> str:
         sections.append(f"🌡 <b>天气</b>  {_format_weather(ctx.weather)}")
 
     if ai_summary:
-        sections.append(f"\n💬 <i>{_e(ai_summary)}</i>")
+        sections.append(f"💬 <i>{_e(ai_summary)}</i>")
 
     return "\n\n".join(sections)
 
@@ -235,8 +232,7 @@ def format_pre_sprint_message(ctx: PreRaceContext, ai_summary: str) -> str:
     sprint_time = format_time(ctx.session.date_start) if ctx.session.date_start else "待定"
 
     sections = [
-        f"🏎💨 <b>{_e(gp)} · 冲刺赛</b>\n{flag} {_e(circuit)} · {_e(country)}\n🕐 {sprint_time} 北京时间",
-        "─ ─ ─ ─ ─ ─ ─ ─ ─ ─",
+        f"🏎💨 <b>{_e(gp)} · 冲刺赛预告</b>\n{flag} {_e(circuit)} · {_e(country)}\n🕐 {sprint_time} 北京时间",
     ]
 
     if ctx.grid:
@@ -249,6 +245,6 @@ def format_pre_sprint_message(ctx: PreRaceContext, ai_summary: str) -> str:
         sections.append(f"🌡 <b>天气</b>  {_format_weather(ctx.weather)}")
 
     if ai_summary:
-        sections.append(f"\n💬 <i>{_e(ai_summary)}</i>")
+        sections.append(f"💬 <i>{_e(ai_summary)}</i>")
 
     return "\n\n".join(sections)
