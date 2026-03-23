@@ -109,6 +109,44 @@ WEATHER_TERMS: dict[str, str] = {
 }
 
 
+CIRCUIT_NAMES: dict[str, str] = {
+    "Melbourne": "墨尔本",
+    "Shanghai": "上海",
+    "Suzuka": "铃鹿",
+    "Sakhir": "萨基尔",
+    "Jeddah": "吉达",
+    "Miami": "迈阿密",
+    "Montreal": "蒙特利尔",
+    "Monaco": "摩纳哥",
+    "Barcelona": "巴塞罗那",
+    "Spielberg": "施皮尔贝格",
+    "Silverstone": "银石",
+    "Budapest": "布达佩斯",
+    "Spa-Francorchamps": "斯帕",
+    "Zandvoort": "赞德沃特",
+    "Monza": "蒙扎",
+    "Baku": "巴库",
+    "Singapore": "新加坡",
+    "Mexico City": "墨西哥城",
+    "São Paulo": "圣保罗",
+    "Las Vegas": "拉斯维加斯",
+    "Lusail": "卢赛尔",
+    "Yas Island": "亚斯岛",
+    "Imola": "伊莫拉",
+    "Albert Park": "阿尔伯特公园",
+    "Marina Bay": "滨海湾",
+    "Interlagos": "英特拉格斯",
+    "Hungaroring": "匈格罗宁",
+    "Red Bull Ring": "红牛环",
+    "Circuit de Monaco": "摩纳哥赛道",
+}
+
+
+def t_circuit(name: str) -> str:
+    """翻译赛道/城市名称。"""
+    return CIRCUIT_NAMES.get(name, name)
+
+
 def t_driver(name: str) -> str:
     """翻译车手名称。"""
     return DRIVER_NAMES.get(name, name)
