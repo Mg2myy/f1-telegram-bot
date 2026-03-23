@@ -1,0 +1,46 @@
+name: F1 Race Notifications
+
+on:
+  # 每30分钟运行一次，检查是否有通知需要发送
+  schedule:
+    - cron: '*/30 * * * *'
+  # 支持手动触发（测试用）
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'Run mode'
+        required: true
+        default: 'check'
+        type: choice
+        options:
+          - check
+          - test
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run F1 Bot
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          F1_SEASON: '2026'
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            python main.py --${{ inputs.mode }}
+          else
+            python main.py --check
+          fi
