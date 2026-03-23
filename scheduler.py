@@ -402,6 +402,7 @@ class RaceScheduler:
         logger.info("Scheduler started")
 
     async def shutdown(self) -> None:
-        self.scheduler.shutdown()
+        if self.scheduler.running:
+            self.scheduler.shutdown()
         await self.fetcher.close()
-        logger.info("Scheduler shut down")
+        logger.info("Shut down complete")
