@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from models import PostRaceContext, PreRaceContext
-from translations import t_country, t_driver, t_gp, t_team
+from translations import t_circuit, t_country, t_driver, t_gp, t_team
 
 
 class SummaryGenerator:
@@ -83,6 +83,7 @@ class SummaryGenerator:
 
         if ctx.next_meeting and not ctx.is_sprint:
             country = t_country(ctx.next_meeting.country_name)
-            sentences.append(f"下一站转战{country} {ctx.next_meeting.circuit_short_name}")
+            circuit = t_circuit(ctx.next_meeting.circuit_short_name)
+            sentences.append(f"下一站转战{country}{circuit}")
 
         return "。".join(sentences) + "。" if sentences else ""
